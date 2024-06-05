@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152064442C103AE000F4E41B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152064432C103AE000F4E41B /* CustomTableViewCell.swift */; };
 		156BCB262C0348FB00018A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB252C0348FB00018A6A /* AppDelegate.swift */; };
 		156BCB282C0348FB00018A6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB272C0348FB00018A6A /* SceneDelegate.swift */; };
 		156BCB2A2C0348FB00018A6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB292C0348FB00018A6A /* MainViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		152064432C103AE000F4E41B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		156BCB222C0348FB00018A6A /* ShareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		156BCB252C0348FB00018A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		156BCB272C0348FB00018A6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				156BCB302C0348FB00018A6A /* LaunchScreen.storyboard */,
 				156BCB332C0348FB00018A6A /* Info.plist */,
 				15D51EBB2C0ECB8200E10508 /* GoogleService-Info.plist */,
+				152064432C103AE000F4E41B /* CustomTableViewCell.swift */,
 			);
 			path = ShareProject;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				156BCB5F2C0354E800018A6A /* LoginViewController.swift in Sources */,
 				15D51EBE2C0ED33D00E10508 /* SetViewController.swift in Sources */,
 				156BCB2A2C0348FB00018A6A /* MainViewController.swift in Sources */,
+				152064442C103AE000F4E41B /* CustomTableViewCell.swift in Sources */,
 				156BCB262C0348FB00018A6A /* AppDelegate.swift in Sources */,
 				15D51EC02C0EDBBA00E10508 /* DateViewController.swift in Sources */,
 				156BCB282C0348FB00018A6A /* SceneDelegate.swift in Sources */,

@@ -4,17 +4,34 @@ import FirebaseAuth
 
 class DateViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
     @IBOutlet weak var tableView: UITableView!
-    var dataArray = [String]()
+    //    var dataArray = [String]()
     var currentUserName = "Unknown User"
+    
+    struct CalendarEvent {
+        var title: String
+        var description: String
+        var author: String
+    }
+    
+    // dataArray의 타입을 변경합니다.
+    var dataArray = [CalendarEvent]()
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-        cell.textLabel?.text = dataArray[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as? CustomTableViewCell else {
+            return UITableViewCell()
+        }
+        let event = dataArray[indexPath.row]
+        
+        cell.titleLabel.text = event.title
+        cell.descriptionLabel.text = event.description
+        cell.authorLabel.text = event.author
         return cell
     }
     
@@ -31,7 +48,8 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+        
         
         if let message = message {
             dateLabel.text = message
@@ -89,13 +107,43 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let num = document.data()["calendar"] as? String
                     if num == self.currentUserName {
                         print("Matched Calendar")
-                        self.dataArray = document.data()["members"] as? [String] ?? ["No Members"]
+                        
+                        // message를 Date로 변환
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd" // message의 날짜 형식에 맞게 설정
+                        guard let messageDate = dateFormatter.date(from: self.message ?? "") else {
+                            print("Error parsing message date")
+                            return
+                        }
+                        
+                        // 여기서 schedule 서브 컬렉션을 조회합니다.
+                        let calendarDocID = document.documentID
+                        db.collection("Calendars").document(calendarDocID).collection("schedule").getDocuments() { (scheduleSnapshot, scheduleErr) in
+                            if let scheduleErr = scheduleErr {
+                                print("Error getting schedules: \(scheduleErr)")
+                            } else {
+                                for scheduleDoc in scheduleSnapshot!.documents {
+                                    if let dateTimestamp = scheduleDoc.data()["date"] as? Timestamp {
+                                        let scheduleDate = dateTimestamp.dateValue()
+                                        
+                                        // messageDate와 scheduleDate를 비교하여 같은 경우에만 데이터를 추가
+                                        if Calendar.current.isDate(scheduleDate, inSameDayAs: messageDate) {
+                                            if let title = scheduleDoc.data()["title"] as? String, let description = scheduleDoc.data()["description"] as? String, let author = scheduleDoc.data()["authors"] as? String {
+                                                let event = CalendarEvent(title: title, description: description, author: author)
+                                                self.dataArray.append(event)
+                                            }
+                                        }
+                                    }
+                                }
+                                self.tableView.reloadData() // 데이터를 가져온 후 tableView를 리로드합니다.
+                            }
+                        }
                         break
                     } else {
                         print("\(num ?? "No Calendar") and \(self.currentUserName)")
                     }
                 }
-                self.tableView.reloadData() // 데이터를 가져온 후 tableView를 리로드합니다.
+                //                self.tableView.reloadData() // 데이터를 가져온 후 tableView를 리로드합니다.
             }
         }
     }

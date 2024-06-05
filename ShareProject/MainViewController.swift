@@ -23,7 +23,7 @@ class MainViewController: UIViewController ,UICalendarSelectionSingleDateDelegat
         let year = dateComponents?.year ?? 0
         let month = dateComponents?.month ?? 0
         let day = dateComponents?.day ?? 0
-        let dateString = "\(year)-\(month)-\(day)"
+        let dateString = "\(year)/\(month)/\(day)"
         
         detailVC.message = dateString
         
