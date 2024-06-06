@@ -8,22 +8,48 @@
 import UIKit
 
 class SetViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var sectionHeader = ["내 정보", "캘린더"]
+    
+    var cellDataSource = [
+            ["마이 페이지", "멤버 정보"], // 첫 번째 섹션의 데이터
+            ["캘린더 정보", "캘린더 이미지","일정 관리"] // 두 번째 섹션의 데이터
+        ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
+        
+        
     }
     
+}
 
-    /*
-    // MARK: - Navigation
+extension SetViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Section
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionHeader.count
     }
-    */
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionHeader[section]
+    }
+
+    // MARK: - Row Cell
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellDataSource[section].count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell")!
+        cell.textLabel?.text = cellDataSource[indexPath.section][indexPath.row]
+        return cell
+    }
 }
