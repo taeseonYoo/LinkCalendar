@@ -19,8 +19,8 @@ class LoginViewController: UIViewController {
     }
     
 
+    
     @IBAction func LoginButton(_ sender: UIButton) {
-        
         let email: String = emailTextField.text!.description
                 let pw: String = pwTextField.text!.description
         
@@ -43,5 +43,4 @@ class LoginViewController: UIViewController {
         }
     }
     
-
 }
