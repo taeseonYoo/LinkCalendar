@@ -35,11 +35,14 @@ class LoginViewController: UIViewController {
                 // 전환된 화면이 보여지는 방법 설정 (fullScreen)
                 TabViewController.modalPresentationStyle = .fullScreen
                 self?.present(TabViewController, animated: true, completion: nil)
+                self!.emailTextField.text=""
+                self!.pwTextField.text=""
             } else {
                 print("로그인 실패")
                 print(error.debugDescription)
                 
             }
+            
         }
     }
     

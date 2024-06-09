@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SetViewController: UIViewController {
     
@@ -25,6 +26,15 @@ class SetViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
         
         
+    }
+    @IBAction func Logout(_ sender: UIButton) {
+        
+        do{
+            try Auth.auth().signOut()
+            self.dismiss(animated: true, completion: nil)
+        }catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
     
 }

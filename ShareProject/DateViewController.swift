@@ -8,6 +8,7 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     //    var dataArray = [String]()
     var currentUserName = "Unknown User"
+    var userName = "na"
     
     struct CalendarEvent {
         var title: String
@@ -15,6 +16,11 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var author: String
     }
     
+    weak var delegate: DateViewControllerDelegate?
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            delegate?.didDismissDateViewController()
+    }
     // dataArray의 타입을 변경합니다.
     var dataArray = [CalendarEvent]()
     
@@ -35,9 +41,12 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//선택되었을 때
         print("\(dataArray[indexPath.row])가 선택되었습니다")
     }
+    
+   
+    
     
     @IBOutlet weak var dateLabel: UILabel!
     var message: String?
@@ -55,6 +64,9 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
             dateLabel.text = message
         }
         
+
+        
+        
         fetchCurrentUserName { [weak self] success in
             guard let self = self else { return }
             if success {
@@ -63,6 +75,8 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("Failed to fetch current user name")
             }
         }
+        
+        
     }
     
     func fetchCurrentUserName(completion: @escaping (Bool) -> Void) {
@@ -79,6 +93,9 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     for document in querySnapshot!.documents {
                         let uid = document.data()["uuid"] as? String
                         if uid == userUid {
+                            if let name = document.data()["name"] as? String{
+                                self.userName = name
+                            }
                             if let sharedCalendar = document.data()["sharedCalendar"] as? String {
                                 self.currentUserName = sharedCalendar
                                 completion(true)
@@ -147,5 +164,44 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
+    
+    @IBAction func addSchedule(_ sender: UIButton) {
+        // 스토리보드 인스턴스 가져오기
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // AddScheduleViewController 인스턴스 생성하기
+            if let addScheduleVC = storyboard.instantiateViewController(withIdentifier: "AddScheduleViewController") as? AddScheduleViewController {
+                addScheduleVC.delegate = self
+                var tmp = Schedule(scheduleNum: "", date: "", authors: "")
+                tmp.scheduleNum=currentUserName
+                tmp.date=message ?? "2024/01/01"
+                tmp.authors=self.userName
+                
+                addScheduleVC.schedule=tmp
+                // 모달로 뷰 컨트롤러 표시하기
+                self.present(addScheduleVC, animated: true, completion: nil)
+            }
+        
+    }
+    
 }
 
+extension DateViewController: AddScheduleViewControllerDelegate {
+    func didAddSchedule() {
+        fetchCurrentUserName { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                self.fetchCalendarData()
+            } else {
+                print("Failed to fetch current user name")
+            }
+        }
+        
+        self.tableView.reloadData()
+        
+        
+    }
+}
+
+protocol DateViewControllerDelegate:AnyObject{
+    func didDismissDateViewController()
+}

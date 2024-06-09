@@ -2,13 +2,30 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegate, UICalendarViewDelegate {
+class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegate, UICalendarViewDelegate , DateViewControllerDelegate{
+    
+    func didDismissDateViewController() {
+        
+        fetchCurrentUserName { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                self.fetchCalendarData()
+            } else {
+                print("Failed to fetch current user name")
+            }
+        }
+        DispatchQueue.main.async {
+            self.calendarVC.reloadDecorations(forDateComponents: self.eventsDatesComponents, animated: true)
+        }
+        
+    }
+    
     var eventsDatesComponents: [DateComponents] = []
     var calendarVC: UICalendarView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         calendarVC = UICalendarView(frame: UIScreen.main.bounds)
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarVC.selectionBehavior = selection
@@ -17,7 +34,7 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
         calendarVC.fontDesign = .rounded
         calendarVC.delegate = self
         self.view.addSubview(calendarVC)
-
+        
         fetchCurrentUserName { [weak self] success in
             guard let self = self else { return }
             if success {
@@ -27,41 +44,45 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
             }
         }
     }
-
+    
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         print("Date is", dateComponents)
         guard let detailVC = self.storyboard?.instantiateViewController(identifier: "DateViewController") as? DateViewController else { return }
-
+        
+        detailVC.delegate=self
         detailVC.modalTransitionStyle = .coverVertical
         detailVC.modalPresentationStyle = .automatic
-
+        
         let year = dateComponents?.year ?? 0
         let month = dateComponents?.month ?? 0
         let day = dateComponents?.day ?? 0
         let dateString = "\(year)/\(month)/\(day)"
-
+        
         detailVC.message = dateString
-
+        
         self.present(detailVC, animated: true, completion: nil)
     }
-
+    
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+        let customBlue = UIColor(red: 75/255.0, green: 137/255.0, blue: 220/255.0, alpha: 1.0)
+        
         for eventDate in eventsDatesComponents {
             if eventDate.year == dateComponents.year && eventDate.month == dateComponents.month && eventDate.day == dateComponents.day {
-                return UICalendarView.Decoration.default(color: .red, size: .large)
+                return UICalendarView.Decoration.default(color: customBlue, size: .large)
+                
             }
         }
         return nil
     }
-
+    
     var currentUserName = "Unknown User"
-
+    
     func fetchCurrentUserName(completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
-
+        
         if let currentUser = Auth.auth().currentUser {
             let userUid = currentUser.uid
-
+            
             db.collection("User").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -84,22 +105,22 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
             completion(false)
         }
     }
-
+    
     func fetchCalendarData() {
         let db = Firestore.firestore()
-
+        
         db.collection("Calendars").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 var uniqueDates = Set<DateComponents>()
                 self.eventsDatesComponents.removeAll()
-
+                
                 for document in querySnapshot!.documents {
                     let num = document.data()["calendar"] as? String
                     if num == self.currentUserName {
                         print("Matched Calendar")
-
+                        
                         let calendarDocID = document.documentID
                         db.collection("Calendars").document(calendarDocID).collection("schedule").getDocuments() { (scheduleSnapshot, scheduleErr) in
                             if let scheduleErr = scheduleErr {
@@ -108,7 +129,7 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
                                 for scheduleDoc in scheduleSnapshot!.documents {
                                     if let dateTimestamp = scheduleDoc.data()["date"] as? Timestamp {
                                         let scheduleDate = dateTimestamp.dateValue()
-
+                                        
                                         let calendar = Calendar.current
                                         let dateComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
                                         
@@ -119,7 +140,7 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
                                         }
                                     }
                                 }
-
+                                
                                 DispatchQueue.main.async {
                                     self.calendarVC.reloadDecorations(forDateComponents: self.eventsDatesComponents, animated: true)
                                 }
@@ -133,6 +154,6 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
             }
         }
     }
-
+    
 }
 
