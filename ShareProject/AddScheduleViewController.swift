@@ -13,6 +13,7 @@ class AddScheduleViewController: UIViewController {
     weak var delegate: AddScheduleViewControllerDelegate?
 
     var schedule : Schedule?
+    var chooseSchedule : CalendarEvent?
     
     var num : String = ""
     var date : String = ""
@@ -90,6 +91,9 @@ class AddScheduleViewController: UIViewController {
     }
     
     
+    @IBAction func BackController(_ sender: UIButton) {
+        self.dismiss(animated: true,completion: nil)
+    }
     
     
 }

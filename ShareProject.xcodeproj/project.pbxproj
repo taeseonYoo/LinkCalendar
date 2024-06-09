@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		150165872C1470E200A1DF21 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150165862C1470E200A1DF21 /* AddScheduleViewController.swift */; };
 		150165892C148D1900A1DF21 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150165882C148D1900A1DF21 /* Schedule.swift */; };
+		1501658B2C15AB3E00A1DF21 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501658A2C15AB3E00A1DF21 /* CalendarEvent.swift */; };
+		1501658D2C15ABC700A1DF21 /* ChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501658C2C15ABC700A1DF21 /* ChangeViewController.swift */; };
 		152064442C103AE000F4E41B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152064432C103AE000F4E41B /* CustomTableViewCell.swift */; };
 		156BCB262C0348FB00018A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB252C0348FB00018A6A /* AppDelegate.swift */; };
 		156BCB282C0348FB00018A6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB272C0348FB00018A6A /* SceneDelegate.swift */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		150165862C1470E200A1DF21 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		150165882C148D1900A1DF21 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		1501658A2C15AB3E00A1DF21 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
+		1501658C2C15ABC700A1DF21 /* ChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeViewController.swift; sourceTree = "<group>"; };
 		152064432C103AE000F4E41B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		156BCB222C0348FB00018A6A /* ShareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		156BCB252C0348FB00018A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,11 +112,13 @@
 				156BCB272C0348FB00018A6A /* SceneDelegate.swift */,
 				156BCB292C0348FB00018A6A /* MainViewController.swift */,
 				156BCB2B2C0348FB00018A6A /* Main.storyboard */,
+				1501658C2C15ABC700A1DF21 /* ChangeViewController.swift */,
 				150165862C1470E200A1DF21 /* AddScheduleViewController.swift */,
 				15D51EBD2C0ED33D00E10508 /* SetViewController.swift */,
 				156BCB5E2C0354E800018A6A /* LoginViewController.swift */,
 				156BCB2E2C0348FB00018A6A /* Assets.xcassets */,
 				15D51EBF2C0EDBBA00E10508 /* DateViewController.swift */,
+				1501658A2C15AB3E00A1DF21 /* CalendarEvent.swift */,
 				150165882C148D1900A1DF21 /* Schedule.swift */,
 				156BCB302C0348FB00018A6A /* LaunchScreen.storyboard */,
 				156BCB332C0348FB00018A6A /* Info.plist */,
@@ -216,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1501658B2C15AB3E00A1DF21 /* CalendarEvent.swift in Sources */,
 				156BCB5F2C0354E800018A6A /* LoginViewController.swift in Sources */,
 				15D51EBE2C0ED33D00E10508 /* SetViewController.swift in Sources */,
 				156BCB2A2C0348FB00018A6A /* MainViewController.swift in Sources */,
@@ -225,6 +232,7 @@
 				15D51EC02C0EDBBA00E10508 /* DateViewController.swift in Sources */,
 				156BCB282C0348FB00018A6A /* SceneDelegate.swift in Sources */,
 				150165872C1470E200A1DF21 /* AddScheduleViewController.swift in Sources */,
+				1501658D2C15ABC700A1DF21 /* ChangeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

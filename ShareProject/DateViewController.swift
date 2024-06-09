@@ -10,16 +10,14 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var currentUserName = "Unknown User"
     var userName = "na"
     
-    struct CalendarEvent {
-        var title: String
-        var description: String
-        var author: String
-    }
+    
     
     weak var delegate: DateViewControllerDelegate?
+    
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            delegate?.didDismissDateViewController()
+        super.viewWillDisappear(animated)
+        
+        delegate?.didDismissDateViewController()
     }
     // dataArray의 타입을 변경합니다.
     var dataArray = [CalendarEvent]()
@@ -43,9 +41,47 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//선택되었을 때
         print("\(dataArray[indexPath.row])가 선택되었습니다")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let changeScheduleVC = storyboard.instantiateViewController(withIdentifier: "ChangeViewController") as? ChangeViewController {
+            
+            changeScheduleVC.delegate=self
+            changeScheduleVC.chooseSchedule=dataArray[indexPath.row]
+            // 모달로 뷰 컨트롤러 표시하기
+            self.present(changeScheduleVC, animated: true, completion: nil)
+        }
     }
+    // UITableViewDelegate 메서드
+        func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+            return .delete
+        }
+        
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                
+                print("\(dataArray[indexPath.row])가 선택되었습니다")
+                
+                
+                
+                let db = Firestore.firestore()
+                
+                db.collection("Calendars").document(dataArray[indexPath.row].calendarNum).collection("schedule").document(dataArray[indexPath.row].documentID).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("\(self.dataArray[indexPath.row])가 삭제되었습니다")
+                        self.dataArray.remove(at: indexPath.row) // 배열에서도 해당 데이터를 삭제합니다.
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                        
+                    }
+                }
+
+                tableView.reloadData()
+            }
+        }
     
-   
+    
     
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -64,7 +100,7 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
             dateLabel.text = message
         }
         
-
+        
         
         
         fetchCurrentUserName { [weak self] success in
@@ -146,7 +182,7 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         // messageDate와 scheduleDate를 비교하여 같은 경우에만 데이터를 추가
                                         if Calendar.current.isDate(scheduleDate, inSameDayAs: messageDate) {
                                             if let title = scheduleDoc.data()["title"] as? String, let description = scheduleDoc.data()["description"] as? String, let author = scheduleDoc.data()["authors"] as? String {
-                                                let event = CalendarEvent(title: title, description: description, author: author)
+                                                let event = CalendarEvent(title: title, description: description, author: author,documentID: scheduleDoc.documentID,calendarNum: calendarDocID)
                                                 self.dataArray.append(event)
                                             }
                                         }
@@ -167,21 +203,28 @@ class DateViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func addSchedule(_ sender: UIButton) {
         // 스토리보드 인스턴스 가져오기
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // AddScheduleViewController 인스턴스 생성하기
-            if let addScheduleVC = storyboard.instantiateViewController(withIdentifier: "AddScheduleViewController") as? AddScheduleViewController {
-                addScheduleVC.delegate = self
-                var tmp = Schedule(scheduleNum: "", date: "", authors: "")
-                tmp.scheduleNum=currentUserName
-                tmp.date=message ?? "2024/01/01"
-                tmp.authors=self.userName
-                
-                addScheduleVC.schedule=tmp
-                // 모달로 뷰 컨트롤러 표시하기
-                self.present(addScheduleVC, animated: true, completion: nil)
-            }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        // AddScheduleViewController 인스턴스 생성하기
+        if let addScheduleVC = storyboard.instantiateViewController(withIdentifier: "AddScheduleViewController") as? AddScheduleViewController {
+            addScheduleVC.delegate = self
+            var tmp = Schedule(scheduleNum: "", date: "", authors: "")
+            tmp.scheduleNum=currentUserName
+            tmp.date=message ?? "2024/01/01"
+            tmp.authors=self.userName
+            
+            addScheduleVC.schedule=tmp
+            // 모달로 뷰 컨트롤러 표시하기
+            self.present(addScheduleVC, animated: true, completion: nil)
+        }
         
     }
+    
+    @IBAction func BackController(_ sender: UIButton) {
+        
+        self.dismiss(animated: true)
+        
+    }
+    
     
 }
 
@@ -199,6 +242,20 @@ extension DateViewController: AddScheduleViewControllerDelegate {
         self.tableView.reloadData()
         
         
+    }
+}
+extension DateViewController: ChangeViewControllerDelegate{
+    func didAddschedule(){
+        fetchCurrentUserName { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                self.fetchCalendarData()
+            } else {
+                print("Failed to fetch current user name")
+            }
+        }
+        
+        self.tableView.reloadData()
     }
 }
 

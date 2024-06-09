@@ -4,28 +4,19 @@ import FirebaseAuth
 
 class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegate, UICalendarViewDelegate , DateViewControllerDelegate{
     
+    
+    
     func didDismissDateViewController() {
         
-        fetchCurrentUserName { [weak self] success in
-            guard let self = self else { return }
-            if success {
-                self.fetchCalendarData()
-            } else {
-                print("Failed to fetch current user name")
-            }
-        }
-        DispatchQueue.main.async {
-            self.calendarVC.reloadDecorations(forDateComponents: self.eventsDatesComponents, animated: true)
-        }
+        
+        self.eventsDatesComponents.removeAll()
+        calendarVC.reloadDecorations(forDateComponents: eventsDatesComponents, animated: false)
+
+        calendarVC.removeFromSuperview()
+        setup()
         
     }
-    
-    var eventsDatesComponents: [DateComponents] = []
-    var calendarVC: UICalendarView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func setup(){
         calendarVC = UICalendarView(frame: UIScreen.main.bounds)
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarVC.selectionBehavior = selection
@@ -45,6 +36,15 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
         }
     }
     
+    var eventsDatesComponents: [DateComponents] = []
+    var calendarVC: UICalendarView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setup()
+    }
+        
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         print("Date is", dateComponents)
         guard let detailVC = self.storyboard?.instantiateViewController(identifier: "DateViewController") as? DateViewController else { return }
@@ -69,7 +69,6 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
         for eventDate in eventsDatesComponents {
             if eventDate.year == dateComponents.year && eventDate.month == dateComponents.month && eventDate.day == dateComponents.day {
                 return UICalendarView.Decoration.default(color: customBlue, size: .large)
-                
             }
         }
         return nil
@@ -115,6 +114,7 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
             } else {
                 var uniqueDates = Set<DateComponents>()
                 self.eventsDatesComponents.removeAll()
+                
                 
                 for document in querySnapshot!.documents {
                     let num = document.data()["calendar"] as? String
