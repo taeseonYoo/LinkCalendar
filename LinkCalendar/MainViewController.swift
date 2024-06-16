@@ -41,7 +41,7 @@ class MainViewController: UIViewController, UICalendarSelectionSingleDateDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
         setup()
     }
         

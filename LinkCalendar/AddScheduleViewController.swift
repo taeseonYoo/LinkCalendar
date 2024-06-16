@@ -21,7 +21,7 @@ class AddScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
         
         if let schedule = schedule {
             print("Schedule Num: \(schedule.scheduleNum)")

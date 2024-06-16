@@ -36,6 +36,7 @@
 		156BCB5B2C03496400018A6A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 156BCB5A2C03496400018A6A /* FirebaseFunctions */; };
 		156BCB5D2C03496400018A6A /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 156BCB5C2C03496400018A6A /* FirebaseFunctionsCombine-Community */; };
 		156BCB5F2C0354E800018A6A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156BCB5E2C0354E800018A6A /* LoginViewController.swift */; };
+		15A1CA9A2C1DC75700D009AC /* KeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1CA992C1DC75700D009AC /* KeyboardExtension.swift */; };
 		15D51EBC2C0ECB8200E10508 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15D51EBB2C0ECB8200E10508 /* GoogleService-Info.plist */; };
 		15D51EBE2C0ED33D00E10508 /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D51EBD2C0ED33D00E10508 /* SetViewController.swift */; };
 		15D51EC02C0EDBBA00E10508 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D51EBF2C0EDBBA00E10508 /* DateViewController.swift */; };
@@ -47,7 +48,7 @@
 		1501658A2C15AB3E00A1DF21 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		1501658C2C15ABC700A1DF21 /* ChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeViewController.swift; sourceTree = "<group>"; };
 		152064432C103AE000F4E41B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		156BCB222C0348FB00018A6A /* ShareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		156BCB222C0348FB00018A6A /* LinkCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		156BCB252C0348FB00018A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		156BCB272C0348FB00018A6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		156BCB292C0348FB00018A6A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		156BCB312C0348FB00018A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		156BCB332C0348FB00018A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		156BCB5E2C0354E800018A6A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		15A1CA992C1DC75700D009AC /* KeyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardExtension.swift; sourceTree = "<group>"; };
 		15D51EBB2C0ECB8200E10508 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		15D51EBD2C0ED33D00E10508 /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		15D51EBF2C0EDBBA00E10508 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		156BCB192C0348FB00018A6A = {
 			isa = PBXGroup;
 			children = (
+				15A1CA992C1DC75700D009AC /* KeyboardExtension.swift */,
 				156BCB242C0348FB00018A6A /* ShareProject */,
 				156BCB232C0348FB00018A6A /* Products */,
 			);
@@ -100,7 +103,7 @@
 		156BCB232C0348FB00018A6A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				156BCB222C0348FB00018A6A /* ShareProject.app */,
+				156BCB222C0348FB00018A6A /* LinkCalendar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,15 +128,16 @@
 				15D51EBB2C0ECB8200E10508 /* GoogleService-Info.plist */,
 				152064432C103AE000F4E41B /* CustomTableViewCell.swift */,
 			);
-			path = ShareProject;
+			name = ShareProject;
+			path = LinkCalendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		156BCB212C0348FB00018A6A /* ShareProject */ = {
+		156BCB212C0348FB00018A6A /* LinkCalendar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 156BCB362C0348FB00018A6A /* Build configuration list for PBXNativeTarget "ShareProject" */;
+			buildConfigurationList = 156BCB362C0348FB00018A6A /* Build configuration list for PBXNativeTarget "LinkCalendar" */;
 			buildPhases = (
 				156BCB1E2C0348FB00018A6A /* Sources */,
 				156BCB1F2C0348FB00018A6A /* Frameworks */,
@@ -143,7 +147,7 @@
 			);
 			dependencies = (
 			);
-			name = ShareProject;
+			name = LinkCalendar;
 			packageProductDependencies = (
 				156BCB3C2C03496400018A6A /* FirebaseAnalytics */,
 				156BCB3E2C03496400018A6A /* FirebaseAnalyticsOnDeviceConversion */,
@@ -164,7 +168,7 @@
 				156BCB5C2C03496400018A6A /* FirebaseFunctionsCombine-Community */,
 			);
 			productName = ShareProject;
-			productReference = 156BCB222C0348FB00018A6A /* ShareProject.app */;
+			productReference = 156BCB222C0348FB00018A6A /* LinkCalendar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -182,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 156BCB1D2C0348FB00018A6A /* Build configuration list for PBXProject "ShareProject" */;
+			buildConfigurationList = 156BCB1D2C0348FB00018A6A /* Build configuration list for PBXProject "LinkCalendar" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -198,7 +202,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				156BCB212C0348FB00018A6A /* ShareProject */,
+				156BCB212C0348FB00018A6A /* LinkCalendar */,
 			);
 		};
 /* End PBXProject section */
@@ -226,6 +230,7 @@
 				156BCB5F2C0354E800018A6A /* LoginViewController.swift in Sources */,
 				15D51EBE2C0ED33D00E10508 /* SetViewController.swift in Sources */,
 				156BCB2A2C0348FB00018A6A /* MainViewController.swift in Sources */,
+				15A1CA9A2C1DC75700D009AC /* KeyboardExtension.swift in Sources */,
 				150165892C148D1900A1DF21 /* Schedule.swift in Sources */,
 				152064442C103AE000F4E41B /* CustomTableViewCell.swift in Sources */,
 				156BCB262C0348FB00018A6A /* AppDelegate.swift in Sources */,
@@ -386,18 +391,19 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VAUG8YH24Z;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ShareProject/Info.plist;
+				INFOPLIST_FILE = LinkCalendar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = taeseon.ShareProject;
+				PRODUCT_BUNDLE_IDENTIFIER = taeseon.LinkCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -414,18 +420,19 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VAUG8YH24Z;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ShareProject/Info.plist;
+				INFOPLIST_FILE = LinkCalendar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = taeseon.ShareProject;
+				PRODUCT_BUNDLE_IDENTIFIER = taeseon.LinkCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -436,7 +443,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		156BCB1D2C0348FB00018A6A /* Build configuration list for PBXProject "ShareProject" */ = {
+		156BCB1D2C0348FB00018A6A /* Build configuration list for PBXProject "LinkCalendar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				156BCB342C0348FB00018A6A /* Debug */,
@@ -445,7 +452,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		156BCB362C0348FB00018A6A /* Build configuration list for PBXNativeTarget "ShareProject" */ = {
+		156BCB362C0348FB00018A6A /* Build configuration list for PBXNativeTarget "LinkCalendar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				156BCB372C0348FB00018A6A /* Debug */,

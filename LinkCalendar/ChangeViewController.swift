@@ -19,6 +19,7 @@ class ChangeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         titleTextField.text=chooseSchedule?.title
         destextView.text=chooseSchedule?.description
