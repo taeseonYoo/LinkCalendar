@@ -25,17 +25,16 @@
 ## :camera: 실행 화면
 
 #### 로그인 화면
-<img width="1710" alt="2" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/14ec5656-ecfe-43c9-8133-d4f7b420fb7a">
+<img width="1710" alt="로그인" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/d3dfc537-cb30-4602-9394-701a7cf6d69b">
 
 #### 메인 화면
-<img width="1710" alt="4" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/ffec7dcb-133f-45e1-9708-7b694eaae0dc">
+<img width="1710" alt="메인" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/97f1c30f-180c-45f9-a44d-f6df03355250">
 
 #### 일정 추가
-<img width="1710" alt="1" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/3c50a8e5-cfc0-4f8d-9c41-4a09cd282233">
+<img width="1710" alt="추가" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/03c64b7e-13aa-42b3-91f7-3b80f657303d">
 
 #### 일정 삭제
-<img width="1710" alt="6" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/513a909a-84aa-4eed-9873-8df7b85ca71c">
+<img width="1710" alt="삭세" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/b0eadfdf-711e-46bb-9591-e2d24967d4b3">
 
 #### 일정 수정
-<img width="1710" alt="5" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/ebeaccf3-50a4-4513-bb4c-3abc124c2243">
-
+<img width="1710" alt="수정" src="https://github.com/taeseonYoo/LinkCalendar/assets/74961371/06150395-fe01-4e7a-9645-a60c8186f68a">
